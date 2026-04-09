@@ -2,31 +2,71 @@ bruno测试
 # ReCall
 
 <div align="center">
-  <img src="assets/recall-banner.svg" alt="ReCall Banner" width="800"/>
+<img src="assets/model.png" width="35%">
 </div>
 
-<div align="center">
+Official implementation of [ReCall: Learning to Reason with Tool Call for LLMs via Reinforcement Learning](https://arxiv.org/abs/2503.19470). 
 
-[![Model](https://img.shields.io/badge/%F0%9F%A4%97%20HF%20Model-ReCall-blue)](https://huggingface.co/Agentica-org/ReCall) [![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20HF%20Dataset-ReSearch-yellow)](https://huggingface.co/datasets/Agentica-org/ReSearch) [![Code](https://img.shields.io/badge/GitHub-Code-green)](https://github.com/Agentica-Project/rllm/tree/main/recipes/ReCall) [![Paper](https://img.shields.io/badge/arXiv-Paper-red)](https://arxiv.org/abs/2503.19470)
+## Updates
+- [2025/03/26] We release the [paper](https://arxiv.org/abs/2503.19470), [code](https://github.com/Agent-RL/ReCall), [dataset](https://huggingface.co/datasets/Agent-RL/ReCall), and [models](https://huggingface.co/Agent-RL/ReCall).
 
-</div>
+## Requirements
+```
+python 3.10+
+```
 
-<p align="center">
-📝 <a href="https://arxiv.org/abs/2503.19470">Paper</a> | 🤗 <a href="https://huggingface.co/Agentica-org/ReCall">HF Model</a> | 🤗 <a href="https://huggingface.co/datasets/Agentica-org/ReSearch">HF Dataset</a>
-</p>
-
-## Introduction
-
-This repository contains the implementation for:
-- **ReSearch: Learning to Reason with Search for LLMs via Reinforcement Learning**
-- **ReCall: Learning to Reason with Tool Call for LLMs via Reinforcement Learning**
-
-## Installation
-
+## Install
 ```bash
+git clone https://github.com/Agent-RL/ReCall.git
+cd ReCall
 pip install -e .
 ```
 
-## Training
+## Data Preparation
+#### Tool Calling
+```bash
+mkdir -p data/tool_calling
+python scripts/tool_calling_data_prepare.py
+```
 
-Please refer to scripts in the `scripts/` directory.
+#### Search
+```bash
+mkdir -p data/search
+python scripts/search_data_prepare.py
+```
+
+## Training
+Please install [veRL](https://github.com/volcengine/verl) and prepare a ray cluster environment.
+
+#### Tool Calling
+```bash
+bash scripts/reinforce_tool.sh
+```
+
+#### Search
+```bash
+bash scripts/reinforce_search.sh
+```
+
+## Evaluation
+Please install [OpenRLHF](https://github.com/OpenRLHF/OpenRLHF).
+
+#### Tool Calling
+```bash
+bash scripts/evaluate_tool.sh
+```
+
+#### Search
+```bash
+bash scripts/evaluate_search.sh
+```
+
+## Citation
+```bibtex
+@article{zheng2025recall,
+  title={ReCall: Learning to Reason with Tool Call for LLMs via Reinforcement Learning},
+  author={Zheng, Nanke and Du, Yibing and Wu, Lianwei and Wang, Deyi and Xie, Xiangpeng and Fan, Yuchen and Zhou, Shanghang},
+  journal={arXiv preprint arXiv:2503.19470},
+  year={2025}
+}
+```
